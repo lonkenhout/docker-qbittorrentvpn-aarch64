@@ -1,5 +1,5 @@
 # qBittorrent aarch64
-**Note: this project is precisely the same as the latest version of the original, except it builds the source for cmake and ninja so it can run on ARM64 setups such as raspberry pis **
+**Note: this project is precisely the same as the latest version of the original, except it builds the source for cmake and ninja so it can run on ARM64 setups such as raspberry pis**
 
 This was only tested on a PI5, however, it will probably work on other PIs too.
 
