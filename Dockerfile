@@ -45,11 +45,15 @@ RUN apt update \
     curl \
     jq \
     unzip \
-    && NINJA_ASSETS=$(curl -sX GET "https://api.github.com/repos/ninja-build/ninja/releases" | jq '.[] | select(.prerelease==false) | .assets_url' | head -n 1 | tr -d '"') \
-    && NINJA_DOWNLOAD_URL=$(curl -sX GET ${NINJA_ASSETS} | jq '.[] | select(.name | match("ninja-linux";"i")) .browser_download_url' | tr -d '"') \
+    build-essential \
+    python3 \
+    && NINJA_DOWNLOAD_URL=$(curl -sX GET "https://api.github.com/repos/ninja-build/ninja/releases" | jq '.[] | select(.prerelease==false) | .zipball_url' | head -n 1 | tr -d '"') \
     && curl -o /opt/ninja-linux.zip -L ${NINJA_DOWNLOAD_URL} \
-    && unzip /opt/ninja-linux.zip -d /opt \
-    && mv /opt/ninja /usr/local/bin/ninja \
+    && unzip -o /opt/ninja-linux.zip -d /opt \
+    && rm /opt/ninja-linux.zip \
+    && cd ninja* \
+    && python3 configure.py --bootstrap \
+    && mv ninja /usr/local/bin/ninja \
     && chmod +x /usr/local/bin/ninja \
     && rm -rf /opt/* \
     && apt purge -y \
@@ -72,7 +76,7 @@ RUN apt update \
     curl \
     jq \
     && CMAKE_ASSETS=$(curl -sX GET "https://api.github.com/repos/Kitware/CMake/releases" | jq '.[] | select(.prerelease==false) | .assets_url' | head -n 1 | tr -d '"') \
-    && CMAKE_DOWNLOAD_URL=$(curl -sX GET ${CMAKE_ASSETS} | jq '.[] | select(.name | match("Linux-x86_64.sh";"i")) .browser_download_url' | tr -d '"') \
+    && CMAKE_DOWNLOAD_URL=$(curl -sX GET ${CMAKE_ASSETS} | jq '.[] | select(.name | match("aarch64.sh";"i")) .browser_download_url' | tr -d '"') \
     && curl -o /opt/cmake.sh -L ${CMAKE_DOWNLOAD_URL} \
     && chmod +x /opt/cmake.sh \
     && /bin/bash /opt/cmake.sh --skip-license --prefix=/usr \

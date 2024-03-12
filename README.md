@@ -1,3 +1,8 @@
+# qBittorrent aarch64
+**Note: this project is precisely the same as the latest version of the original, except it builds the source for cmake and ninja so it can run on ARM64 setups such as raspberry pis **
+
+This was only tested on a PI5, however, it will probably work on other PIs too.
+
 # [qBittorrent](https://github.com/qbittorrent/qBittorrent), WireGuard and OpenVPN
 [![Docker Pulls](https://img.shields.io/docker/pulls/dyonr/qbittorrentvpn)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dyonr/qbittorrentvpn/latest)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
